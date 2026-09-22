@@ -1,0 +1,38 @@
+Analyze the supplied candidate RESUME DATA against the supplied TARGET JOB DATA.
+
+Use ONLY these two inputs.
+
+Do not use outside knowledge.
+
+Your task is to:
+
+1. Identify the most important job requirements.
+2. Assign each requirement a priority.
+3. Determine what the resume explicitly demonstrates for each requirement.
+4. Classify the evidence level.
+5. Classify the match.
+6. Identify the appropriate gap type.
+7. Identify whether the resume can be improved through rewriting, requires additional truthful evidence, or cannot be fixed through rewriting.
+8. Provide the relevant resume evidence and a concise resume action.
+
+Do NOT calculate a fit score.
+
+Do NOT generate strong matches.
+
+Do NOT generate a final list of gaps.
+
+Do NOT generate rewritten resume content.
+
+The backend will calculate the score and generate the UI from your requirement-level analysis.
+
+==================================================
+CANDIDATE RESUME DATA
+==================================================
+
+{{RESUME_DATA}}
+
+==================================================
+TARGET JOB DATA
+==================================================
+
+{{JOB_DATA}}

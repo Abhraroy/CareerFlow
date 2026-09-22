@@ -1,0 +1,629 @@
+# JobFindMatch — Cover Letter Generation Instructions
+
+## 1. Objective
+
+Generate a **job-specific cover letter** using the structured data already available inside the JobFindMatch pipeline.
+
+The LLM must **not independently scrape, re-parse, or invent job or resume information**.
+
+The system will provide the LLM with:
+
+1. Structured **Job Data**
+2. Structured **Resume Data**
+3. Existing **Job–Resume Analysis / Requirement Matching Data**
+4. Optional **Tailored Resume Data**, when available
+
+The responsibility of this LLM is to transform those inputs into a professional cover letter following the JobFindMatch cover-letter format.
+
+---
+
+# 2. Core Principle
+
+Treat the inputs as the **source of truth**.
+
+```text
+Job Data
+    +
+Resume Data
+    +
+Job–Resume Analysis
+    +
+Optional Tailored Resume
+    ↓
+Cover Letter Generation
+```
+
+Do not perform a second independent analysis of the job or resume unless required to understand the supplied data.
+
+The cover letter must reflect the actual candidate's experience and the actual requirements of the specific job.
+
+---
+
+# 3. Input: Job Data
+
+Use the structured job information provided by JobFindMatch.
+
+Relevant job fields may include:
+
+* Job title
+* Company name
+* Job description
+* Responsibilities
+* Requirements
+* Qualifications
+* Required skills
+* Preferred skills
+* Technologies
+* Tools
+* Frameworks
+* Experience requirements
+* Location
+* Employment type
+* Job source/portal
+* Job URL
+* Other structured job metadata
+
+### Priority
+
+For cover-letter generation, prioritize:
+
+1. Job title
+2. Company
+3. Responsibilities
+4. Required qualifications
+5. Required skills
+6. Preferred qualifications
+7. Technologies/tools
+8. Other relevant job information
+
+Do not mention job information that is irrelevant to the candidate's application.
+
+---
+
+# 4. Input: Resume Data
+
+Use the structured resume information provided by JobFindMatch.
+
+Relevant fields may include:
+
+* Candidate name
+* Professional summary
+* Work experience
+* Job titles
+* Companies
+* Employment dates
+* Responsibilities
+* Achievements
+* Skills
+* Technical skills
+* Projects
+* Education
+* Certifications
+* Other resume sections
+
+The resume is the authoritative source for the candidate's actual background.
+
+---
+
+# 5. Input: Job–Resume Analysis
+
+JobFindMatch may provide an existing analysis of how the candidate matches the job.
+
+This analysis can contain information such as:
+
+* Matched requirements
+* Matching skills
+* Relevant experience
+* Relevant projects
+* Requirement-to-resume relationships
+* Strengths
+* Experience relevance
+* Skill relevance
+* Potential gaps
+* Other LLM-generated matching information
+
+Use this analysis as a **relevance signal**.
+
+For example:
+
+```text
+Job Requirement
+        ↓
+Existing JobFindMatch Analysis
+        ↓
+Relevant Resume Evidence
+        ↓
+Cover Letter Qualification
+```
+
+The cover-letter LLM should prioritize strong matches identified by the existing analysis.
+
+---
+
+# 6. Optional Tailored Resume Data
+
+If a tailored resume exists for the specific job, it may be supplied as an additional input.
+
+Use it to understand:
+
+* Which candidate experiences were emphasized
+* Which skills were prioritized
+* Which projects were considered relevant
+* Which achievements were highlighted
+
+However:
+
+**The tailored resume must not become a source for fabricated information.**
+
+All claims must ultimately be supported by the original resume data.
+
+The tailored resume is primarily a **relevance and prioritization signal**.
+
+---
+
+# 7. Requirement Selection
+
+Do not include every requirement from the job posting.
+
+Select approximately **3–6 of the most important requirements** based on:
+
+1. Importance to the advertised role
+2. Strength of the candidate's match
+3. Relevance of the candidate's experience
+4. Skills explicitly required by the job
+5. Evidence available in the resume
+6. Existing JobFindMatch analysis
+
+Prioritize requirements where there is strong evidence of the candidate's capability.
+
+Avoid highlighting requirements where the candidate has no meaningful supporting evidence.
+
+---
+
+# 8. Requirement → Qualification Mapping
+
+For every selected requirement, create a concise relationship:
+
+```text
+JOB REQUIREMENT
+        ↓
+CANDIDATE'S RELEVANT EXPERIENCE
+        ↓
+WHY THAT EXPERIENCE MATCHES
+```
+
+Example:
+
+### Job Requirement
+
+> Collaborate with cross-functional teams to deliver product features.
+
+### Resume Evidence
+
+Candidate has experience working with development, design, and business stakeholders.
+
+### Generated Qualification
+
+> Worked across development, design, and business stakeholders to translate requirements into actionable features and coordinate delivery across teams.
+
+The qualification must **interpret the candidate's experience in the context of the job**.
+
+Do not simply copy the resume bullet.
+
+---
+
+# 9. Do Not Fabricate Matches
+
+The LLM must never:
+
+* Invent experience
+* Invent companies
+* Invent job titles
+* Invent responsibilities
+* Invent projects
+* Invent technologies
+* Invent achievements
+* Invent metrics
+* Invent certifications
+* Invent years of experience
+* Invent hiring managers
+* Claim expertise not supported by the resume
+* Claim the candidate performed an activity merely because it appears in the job description
+
+If a job requires something that is not present in the candidate's background, do not falsely represent the candidate as having that experience.
+
+Use transferable experience only when there is a legitimate connection.
+
+---
+
+# 10. Cover Letter Personalization
+
+The generated letter should answer:
+
+### Who is the candidate?
+
+Use the candidate's strongest professional identity from the resume.
+
+### Why this role?
+
+Connect the candidate's experience to the role.
+
+### Why this company?
+
+Use the company name and job context when appropriate.
+
+Do not invent company values, products, culture, or achievements unless those facts are explicitly available in the supplied job/company data.
+
+### Why is the candidate relevant?
+
+Use the strongest job-resume matches.
+
+---
+
+# 11. Opening
+
+Generate an opening using this general structure:
+
+```text
+Attn: [Hiring Manager Name OR Hiring Manager]
+
+Dear [Hiring Manager Name OR Hiring Manager],
+
+I am a [RELEVANT PROFESSIONAL TITLE] with [RELEVANT EXPERIENCE] in [RELEVANT DOMAIN], and I am excited to apply for the [JOB TITLE] position at [COMPANY].
+```
+
+Do not force the exact wording.
+
+Make it natural and specific to the candidate.
+
+If the hiring manager's name is not available:
+
+```text
+Attn: Hiring Manager
+```
+
+Never guess a person's name.
+
+---
+
+# 12. Professional Identity Section
+
+Write **1–2 paragraphs** describing the candidate's professional identity.
+
+Use relevant information from:
+
+* Resume summary
+* Work experience
+* Projects
+* Skills
+* Job-resume analysis
+
+Explain:
+
+* Who the candidate is
+* What they specialize in
+* What type of problems they solve
+* What they enjoy working on
+* What professional approach they bring
+
+Avoid generic statements such as:
+
+> I am a hardworking, passionate and dedicated individual.
+
+Instead, make the statement specific to the candidate's actual professional background.
+
+---
+
+# 13. Job Alignment Section
+
+Add a section titled:
+
+```markdown
+## How My Experience Aligns With the Role
+```
+
+Create a Markdown table:
+
+| **Advertised Requirement** | **My Qualifications**                  |
+| -------------------------- | -------------------------------------- |
+| **[Requirement]**          | **[Candidate-specific qualification]** |
+| **[Requirement]**          | **[Candidate-specific qualification]** |
+| **[Requirement]**          | **[Candidate-specific qualification]** |
+
+Use **3–6 rows**.
+
+The left column should represent the important job requirement.
+
+The right column should explain how the candidate's actual background satisfies or relates to that requirement.
+
+---
+
+# 14. Qualification Writing Rules
+
+The qualification column must:
+
+* Be specific
+* Be concise
+* Be evidence-based
+* Be written specifically for the job
+* Connect experience to the requirement
+* Avoid copying resume bullets
+* Avoid copying the job description
+* Mention relevant technologies when useful
+* Mention outcomes when actual metrics are available
+
+### Do
+
+> Built and maintained full-stack applications using React, Next.js, TypeScript, and database-backed services, aligning closely with the role's requirement for modern web application development.
+
+### Do Not
+
+> I have React, Next.js, TypeScript, and database experience.
+
+The first demonstrates relevance; the second merely lists skills.
+
+---
+
+# 15. Closing
+
+Finish with a concise closing paragraph.
+
+The closing should:
+
+* Express interest in the opportunity
+* Connect the candidate's experience to the company/role
+* Invite further discussion
+
+Example:
+
+> I would welcome the opportunity to discuss how my experience and skills could contribute to [COMPANY NAME] and the goals of the [ROLE/TEAM].
+
+Then:
+
+> Thank you for your time and consideration. I look forward to hearing from you.
+
+Sign using the candidate's actual name from the resume.
+
+---
+
+# 16. Output Structure
+
+Return **only the completed cover letter** in Markdown.
+
+Use this structure:
+
+```markdown
+Attn: [HIRING MANAGER NAME OR "Hiring Manager"]
+
+Dear [HIRING MANAGER NAME OR "Hiring Manager"],
+
+[JOB-SPECIFIC INTRODUCTION]
+
+[PROFESSIONAL IDENTITY / MOTIVATION PARAGRAPH]
+
+[OPTIONAL SECOND PARAGRAPH]
+
+## How My Experience Aligns With the Role
+
+| **Advertised Requirement** | **My Qualifications** |
+|---|---|
+| **[Requirement 1]** | **[Relevant candidate qualification]** |
+| **[Requirement 2]** | **[Relevant candidate qualification]** |
+| **[Requirement 3]** | **[Relevant candidate qualification]** |
+| **[Requirement 4]** | **[Relevant candidate qualification]** |
+
+[CLOSING PARAGRAPH]
+
+Thank you for your time and consideration. I look forward to hearing from you.
+
+Sincerely,  
+**[CANDIDATE NAME]**
+```
+
+---
+
+# 17. Missing Data Handling
+
+JobFindMatch data may occasionally be incomplete.
+
+Follow these rules:
+
+### Missing Hiring Manager
+
+Use:
+
+> Hiring Manager
+
+### Missing Company
+
+Do not invent the company.
+
+Use the available job identifier/context only if necessary.
+
+### Missing Experience Duration
+
+Do not calculate or invent years of experience.
+
+Avoid statements such as:
+
+> with over 5 years of experience
+
+unless the supplied resume data supports it.
+
+### Missing Professional Title
+
+Infer a reasonable professional identity from the candidate's actual experience only when the inference is obvious.
+
+Otherwise use a neutral description.
+
+### Missing Matching Requirement
+
+Do not force a match.
+
+Select another requirement with stronger evidence.
+
+---
+
+# 18. Tailoring Logic
+
+The cover letter must be **different for different jobs even when the same resume is used**.
+
+For example:
+
+```text
+Same Resume
+     +
+Software Engineer Job
+     ↓
+Emphasize:
+- Software development
+- Architecture
+- Programming
+- APIs
+- Databases
+- Technical projects
+```
+
+Whereas:
+
+```text
+Same Resume
+     +
+Product Manager Job
+     ↓
+Emphasize:
+- Requirements
+- Product thinking
+- Stakeholder collaboration
+- Prioritization
+- Product delivery
+- User/business problems
+```
+
+Therefore, do not create a static cover letter from the resume.
+
+The **job data determines what parts of the resume should be emphasized**.
+
+---
+
+# 19. Relationship With Resume Tailoring
+
+Cover-letter generation should work alongside the resume-tailoring pipeline.
+
+The preferred flow is:
+
+```text
+Original Job Data
+       ↓
+Original Resume Data
+       ↓
+Job–Resume Analysis
+       ↓
+Resume Tailoring
+       ↓
+Tailored Resume
+       ↓
+Cover Letter Generation
+```
+
+The cover letter should use the same core matching logic as the tailored resume so that the two documents remain consistent.
+
+For example, if the tailored resume emphasizes:
+
+* React
+* Next.js
+* API development
+* Product-focused projects
+
+the cover letter should not suddenly emphasize unrelated experience unless the job requires it.
+
+---
+
+# 20. Consistency Rules
+
+The following must remain consistent across the JobFindMatch output:
+
+### Job title
+
+The cover letter must use the same target job title provided by the job data.
+
+### Company
+
+Use the company associated with the selected job.
+
+### Candidate identity
+
+Use the candidate information from the resume.
+
+### Skills
+
+Do not introduce skills that were not present in the resume.
+
+### Experience
+
+Do not create experience that does not exist.
+
+### Matching logic
+
+Use the existing JobFindMatch analysis as the primary guide for selecting relevant experience.
+
+---
+
+# 21. Quality Validation Before Output
+
+Before returning the final cover letter, internally verify:
+
+### Job
+
+* Correct job title
+* Correct company
+* Requirements came from the supplied job data
+* Requirements selected based on relevance
+
+### Resume
+
+* Candidate name is correct
+* Professional identity is supported
+* Experience is accurate
+* Skills are accurate
+* Projects are accurate
+* Achievements are accurate
+
+### Matching
+
+* Every qualification has evidence
+* No requirement is falsely claimed
+* Strongest matches are prioritized
+* Existing JobFindMatch analysis is respected
+
+### Writing
+
+* Sounds human
+* Is professional
+* Is specific
+* Is concise
+* Does not repeat the resume
+* Does not copy the job description
+* Does not use generic filler
+
+### Output
+
+* Markdown format
+* Correct table structure
+* 3–6 requirement matches
+* Professional closing
+* No unresolved placeholders unless source data is genuinely missing
+
+---
+
+# 22. Important Final Rule
+
+**Do not treat this as a resume summarization task.**
+
+The objective is:
+
+> **Determine which parts of the candidate's existing experience are most relevant to this specific job and present those connections persuasively in the required cover-letter format.**
+
+The LLM should act as a **job-specific professional writing and evidence-matching layer** on top of the existing JobFindMatch data and analysis pipeline.
+
+It should not replace the job extraction, resume extraction, requirement analysis, or resume tailoring systems.

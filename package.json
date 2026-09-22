@@ -1,6 +1,9 @@
 {
   "name": "career-flow",
   "version": "1.0.0",
+  "trustedDependencies": [
+    "electron"
+  ],
   "description": "A local first AI powered application for finding matching jobs and tailoring resumes for the same.",
   "main": "./out/main/index.js",
   "author": "Abhradip Roy",
@@ -14,7 +17,7 @@
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
     "build": "npm run typecheck && electron-vite build",
-    "postinstall": "electron-builder install-app-deps",
+    "postinstall": "node node_modules/electron/install.js && electron-builder install-app-deps",
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
     "build:mac": "npm run build && electron-builder --mac",

@@ -1,0 +1,101 @@
+Analyze the existing ResumeDocument and determine which existing resume elements should be modified to better match the target job.
+
+## EXISTING STRUCTURED RESUME DATA (from storage/resumes)
+
+{{RESUME_DATA}}
+
+## DATA TO TAILOR
+
+{{DATA_TO_TAILOR}}
+
+## RESOLVED REQUIREMENTS
+
+{{RESOLVED_REQUIREMENTS}}
+
+## TASK
+
+Create an EditPlan for the existing ResumeDocument.
+
+The EditPlan must contain ONLY meaningful targeted edits that improve alignment with the target job.
+
+Do not return the complete resume.
+
+Do not reconstruct the resume.
+
+Do not return unchanged content.
+
+Every edit must reference an existing element ID from the supplied ResumeDocument.
+
+Every edit must include:
+
+* `targetId`
+* `operation`
+* `originalContent`
+* `newContent`
+* `reason`
+
+The allowed operations are:
+
+* `replace`
+* `insert_before`
+* `insert_after`
+* `append`
+
+For every edit, include the exact current content of the target element or insertion target in `originalContent`.
+
+Use the following operation meanings:
+
+* `replace`: Replace the content of the existing element identified by `targetId`.
+* `insert_before`: Insert `newContent` immediately before the existing element identified by `targetId`.
+* `insert_after`: Insert `newContent` immediately after the existing element identified by `targetId`.
+* `append`: Append `newContent` to the existing collection or editable element identified by `targetId`.
+
+Use BOTH the existing resume and the candidate-provided RESOLVED REQUIREMENTS as the factual sources of truth.
+
+Use DATA_TO_TAILOR to determine what should be emphasized, rewritten, or clarified.
+
+For requirements that could not be fixed via resume rewrites alone or lacked evidence, such as `CANNOT_FIX_WITH_REWRITE` or `ADD_EVIDENCE_IF_TRUE`, use the verified candidate responses from RESOLVED REQUIREMENTS when they are available and when an appropriate existing resume element can be targeted.
+
+The final edits must be optimized for the target requirements while remaining completely truthful.
+
+## IMPORTANT
+
+You are allowed to update existing content substantially when doing so improves relevance.
+
+You may create targeted edits to:
+
+* Experience bullets that should emphasize relevant responsibilities, tools, accomplishments, or candidate-provided evidence.
+* Project descriptions or bullets that should highlight relevant tools, decisions, features, scale, or impact.
+* Existing skills elements when supported by the existing resume or resolved requirements.
+* Summary text when supported evidence should be emphasized.
+* Other existing editable elements when a targeted change is necessary.
+
+You are NOT allowed to:
+
+* Return a complete reconstructed resume.
+* Invent experience absent from both the resume and resolved requirements.
+* Invent skills absent from both the resume and resolved requirements.
+* Invent technologies absent from both the resume and resolved requirements.
+* Invent metrics absent from both the resume and resolved requirements.
+* Invent certifications or education.
+* Invent companies or job titles.
+* Claim unsupported experience without resume or resolved requirements evidence.
+* Invent target IDs.
+* Reference IDs that do not exist in the supplied ResumeDocument.
+* Remove sections or elements.
+* Reorder sections, experience, projects, skills, or bullets.
+* Rename sections.
+* Replace an entire section when an individual element can be edited instead.
+* Add content without a valid existing element or insertion target.
+
+Prefer editing the smallest relevant element, especially individual experience bullets, project descriptions, project bullets, summary text, and individual skills.
+
+Preserve existing metrics and factual meaning unless a supported correction is explicitly provided in RESOLVED REQUIREMENTS.
+
+If no meaningful changes are required, return exactly:
+
+{
+  "edits": []
+}
+
+Return only the EditPlan object in the requested structured-output format.

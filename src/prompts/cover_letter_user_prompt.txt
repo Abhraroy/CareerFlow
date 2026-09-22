@@ -1,0 +1,10 @@
+Generate a tailored cover letter based on the following resume and job details:
+
+## CANDIDATE RESUME DATA:
+{{RESUME_DATA}}
+
+## TARGET JOB DETAILS:
+{{JOB_DATA}}
+
+## TASK:
+Write a tailored cover letter matching the candidate's skills and achievements with the requirements of the job. Return only the final text of the cover letter ready to send.
