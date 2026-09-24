@@ -32,11 +32,11 @@ Pre-packaged installers are generated directly via CI/CD for Windows, macOS, and
 
 | Operating System | Package | Direct Download Link | Architecture |
 | :--- | :--- | :--- | :--- |
-| **Windows** | Setup Installer (`.exe`) | [**📥 Download CareerFlow-Setup.exe**](https://github.com/Abhraroy/CareerFlow/releases/latest/download/career-flow-1.0.1-setup.exe) | x64 |
-| **macOS (Apple Silicon)** | Disk Image (`.dmg`) | [**📥 Download CareerFlow-arm64.dmg**](https://github.com/Abhraroy/CareerFlow/releases/latest/download/career-flow-1.0.1-arm64.dmg) | Apple Silicon (M1 / M2 / M3 / M4) |
-| **macOS (Intel)** | Disk Image (`.dmg`) | [**📥 Download CareerFlow-x64.dmg**](https://github.com/Abhraroy/CareerFlow/releases/latest/download/career-flow-1.0.1-x64.dmg) | Intel 64-bit |
-| **Linux** | Universal Binary | [**📥 Download CareerFlow.AppImage**](https://github.com/Abhraroy/CareerFlow/releases/latest/download/career-flow-1.0.1.AppImage) | x64 |
-| **Linux (Debian/Ubuntu)** | Package (`.deb`) | [**📥 Download CareerFlow.deb**](https://github.com/Abhraroy/CareerFlow/releases/latest/download/career-flow-1.0.1.deb) | x64 |
+| **Windows** | Setup Installer (`.exe`) | [**📥 Download CareerFlow-Setup.exe**](https://github.com/Abhraroy/CareerFlow/releases/latest/download/career-flow-1.0.2-setup.exe) | x64 |
+| **macOS (Apple Silicon)** | Disk Image (`.dmg`) | [**📥 Download CareerFlow-arm64.dmg**](https://github.com/Abhraroy/CareerFlow/releases/latest/download/career-flow-1.0.2-arm64.dmg) | Apple Silicon (M1 / M2 / M3 / M4) |
+| **macOS (Intel)** | Disk Image (`.dmg`) | [**📥 Download CareerFlow-x64.dmg**](https://github.com/Abhraroy/CareerFlow/releases/latest/download/career-flow-1.0.2-x64.dmg) | Intel 64-bit |
+| **Linux** | Universal Binary | [**📥 Download CareerFlow.AppImage**](https://github.com/Abhraroy/CareerFlow/releases/latest/download/career-flow-1.0.2.AppImage) | x64 |
+| **Linux (Debian/Ubuntu)** | Package (`.deb`) | [**📥 Download CareerFlow.deb**](https://github.com/Abhraroy/CareerFlow/releases/latest/download/career-flow-1.0.2.deb) | x64 |
 
 > 📌 *All binaries and checksums are published on the [CareerFlow GitHub Releases page](https://github.com/Abhraroy/CareerFlow/releases).*
 

@@ -3,7 +3,7 @@
   "configVersion": 0,
   "workspaces": {
     "": {
-      "name": "jobcopilot",
+      "name": "career-flow",
       "dependencies": {
         "@ai-sdk/openai": "^4.0.41",
         "@electron-toolkit/preload": "^3.0.2",

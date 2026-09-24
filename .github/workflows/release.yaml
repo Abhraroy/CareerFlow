@@ -19,19 +19,19 @@ jobs:
           - os: windows-latest
             arch: x64
             target: win-x64
-            build_cmd: bun run build && bun x electron-builder --win --x64
+            build_cmd: npm run build && npx electron-builder --win --x64
           - os: macos-13 # Intel Mac runner
             arch: x64
             target: mac-intel
-            build_cmd: bun run build && bun x electron-builder --mac --x64
+            build_cmd: npm run build && npx electron-builder --mac --x64
           - os: macos-14 # Apple Silicon (M1/M2) runner
             arch: arm64
             target: mac-arm64
-            build_cmd: bun run build && bun x electron-builder --mac --arm64
+            build_cmd: npm run build && npx electron-builder --mac --arm64
           - os: ubuntu-latest
             arch: x64
             target: linux-x64
-            build_cmd: bun run build && bun x electron-builder --linux AppImage deb
+            build_cmd: npm run build && npx electron-builder --linux AppImage deb
 
     runs-on: ${{ matrix.os }}
 
@@ -39,23 +39,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'npm'
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: npm ci
 
       - name: Run Typecheck & Tests
         run: |
-          bun run typecheck
-          bun test
+          npm run typecheck
+          npm test
 
       - name: Build & Package
         env:
